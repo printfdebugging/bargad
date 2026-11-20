@@ -1,0 +1,24 @@
+[submodule "glfw"]
+	path = vendor/glfw
+	url = https://github.com/debuffio/glfw
+[submodule "cglm"]
+	path = vendor/cglm
+	url = https://github.com/debuffio/cglm
+[submodule "glad"]
+	path = vendor/glad
+	url = https://github.com/debuffio/glad
+[submodule "harfbuzz"]
+	path = vendor/harfbuzz
+	url = https://github.com/debuffio/harfbuzz
+[submodule "stb"]
+	path = vendor/stb
+	url = https://github.com/debuffio/stb-cmake
+[submodule "lua"]
+	path = vendor/lua
+	url = https://github.com/debuffio/lua-cmake
+[submodule "cgltf"]
+	path = vendor/cgltf
+	url = https://github.com/debuffio/cgltf-cmake
+[submodule "libuv"]
+	path = vendor/libuv
+	url = https://github.com/debuffio/libuv
