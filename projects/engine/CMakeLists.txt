@@ -4,5 +4,7 @@ library(engine
 	LANGUAGES C
 	PUBLIC_LIBRARIES glad glfw
 	PRIVATE_LIBRARIES "${DWMAPI}"
+	ENABLE_TESTING
+	TESTING_LIBRARIES libuv::libuv
 )
 
