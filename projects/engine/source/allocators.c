@@ -24,7 +24,7 @@ pool_init(struct pool *pool, struct pool_options options)
 	}
 
 	if (invalid_alignment) {
-		LOG_ERROR("options.alignment %" PRIu64 " is not a power of 2\n", options.alignment);
+		LOG_ERROR("options.alignment %" PRIu64 ", or options.chunksize %" PRIu64 " is not a power of 2\n", options.alignment, options.chunksize);
 		return false;
 	}
 #endif
