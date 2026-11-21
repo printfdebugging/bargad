@@ -6,12 +6,14 @@
 
 #if __has_feature(address_sanitizer) || defined(__SANITIZE_ADDRESS__)
 const char *
-__lsan_default_options() {
+__lsan_default_options()
+{
 	return "print_suppressions=0";
 }
 
 const char *
-__lsan_default_suppressions() {
+__lsan_default_suppressions()
+{
 	return "leak:_glfwConnectX11\n"
 	       "leak:_glfwInitX11\n"
 	       "leak:getSystemContentScale\n"
@@ -22,7 +24,8 @@ __lsan_default_suppressions() {
 }
 
 const char *
-__asan_default_options() {
+__asan_default_options()
+{
 	return "stack_trace_format=\"%S (%f)\"";
 }
 
