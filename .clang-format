@@ -14,7 +14,12 @@ IndentGotoLabels: NoIndent
 AlignAfterOpenBracket: false
 AlignConsecutiveAssignments: true
 AlignConsecutiveBitFields: true
-AlignConsecutiveDeclarations: true
+AlignConsecutiveDeclarations:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+  AlignFunctionDeclarations: false
+  AlignFunctionPointers: false
 AlignConsecutiveMacros: true
 AlignConsecutiveShortCaseStatements:
   Enabled: true
