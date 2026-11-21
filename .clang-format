@@ -1,0 +1,95 @@
+BasedOnStyle: Chromium
+
+# Indentation
+UseTab: ForContinuationAndIndentation
+IndentWidth: 8
+ContinuationIndentWidth: 8
+ConstructorInitializerIndentWidth: 8
+AccessModifierOffset: -8
+IndentCaseLabels: true
+IndentPPDirectives: AfterHash
+IndentGotoLabels: NoIndent
+
+# Alignment
+AlignAfterOpenBracket: false
+AlignConsecutiveAssignments: true
+AlignConsecutiveBitFields: true
+AlignConsecutiveDeclarations: true
+AlignConsecutiveMacros: true
+AlignConsecutiveShortCaseStatements:
+  Enabled: true
+AlignEscapedNewlines: DontAlign
+AlignOperands: DontAlign
+AlignTrailingComments: true
+
+# Brackets and braces
+BreakBeforeBraces: Linux
+BreakAfterOpenBracketIf: true
+BreakAfterOpenBracketFunction: true
+BreakAfterOpenBracketBracedList: true
+BreakBeforeCloseBracketIf: true
+BreakBeforeCloseBracketFunction: true
+BreakBeforeCloseBracketBracedList: true
+BreakAfterAttributes: LeaveAll
+Cpp11BracedListStyle: false
+
+# Line breaks
+ColumnLimit: 0
+BreakAfterReturnType: AllDefinitions
+BreakBeforeReturnType: None
+BreakTemplateDeclarations: Yes
+BreakConstructorInitializers: BeforeComma
+BreakBeforeTernaryOperators: true
+AlwaysBreakBeforeMultilineStrings: false
+
+# Single-line constructs
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortLoopsOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: true
+
+# Argument and parameter packing
+BinPackArguments: false
+BinPackParameters: false
+BinPackLongBracedList: true
+PackConstructorInitializers: BinPack
+AllowAllParametersOfDeclarationOnNextLine: true
+ExperimentalAutoDetectBinPacking: false
+
+# Spacing
+PointerAlignment: Right
+SpaceAfterCStyleCast: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeParens: Custom
+SpaceBeforeParensOptions:
+  AfterControlStatements: true
+  AfterFunctionDefinitionName: false
+  AfterForeachMacros: false
+  AfterFunctionDeclarationName: false
+  AfterOverloadedOperator: true
+  AfterPlacementOperator: false
+
+# Sorting
+SortIncludes:
+  Enabled: true
+  Natural: true
+  IgnoreExtension: true
+  FilesBeforeFolders: true
+SortUsingDeclarations: true
+
+AttributeMacros: [
+  'attribute_malloc',
+  'attribute_alloc_size',
+]
+
+Macros:
+  - 'attribute_malloc=[[gnu::malloc]]'
+  - 'attribute_alloc_size(x)=[[gnu::alloc_size(x)]]'
+  - 'attribute_nonnull()=[[gnu::nonnull]]'
+  - 'attribute_nonnull(a)=[[gnu::nonnull(a)]]'
+  - 'attribute_nonnull(a,b)=[[gnu::nonnull(a,b)]]'
+  - 'attribute_nonnull(a,b,c)=[[gnu::nonnull(a,b,c)]]'
+  - 'attribute_nonnull(a,b,c,d)=[[gnu::nonnull(a,b,c,d)]]'
