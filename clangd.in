@@ -1,0 +1,10 @@
+Completion:
+  HeaderInsertion: @CLANGD_COMPLETION_HEADER_INSERTION@
+
+Diagnostics:
+   UnusedIncludes: @CLANGD_DIAGNOSTICS_UNUSED_INCLUDES@
+   Includes:
+      IgnoreHeader: [ @CLANGD_DIAGNOSTICS_IGNORE_HEADER@ ]
+
+CompileFlags:
+   CompilationDatabase: @CLANGD_COMPILE_COMMANDS_FILE_DIRECTORY@

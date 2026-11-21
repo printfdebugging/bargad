@@ -1,0 +1,8 @@
+add_subdirectory(${CMAKE_SOURCE_DIR}/vendor/cglm)
+add_subdirectory(${CMAKE_SOURCE_DIR}/vendor/glfw)
+add_subdirectory(${CMAKE_SOURCE_DIR}/vendor/glad)
+add_subdirectory(${CMAKE_SOURCE_DIR}/vendor/harfbuzz)
+add_subdirectory(${CMAKE_SOURCE_DIR}/vendor/lua)
+add_subdirectory(${CMAKE_SOURCE_DIR}/vendor/cgltf)
+add_subdirectory(${CMAKE_SOURCE_DIR}/vendor/stb)
+add_subdirectory(${CMAKE_SOURCE_DIR}/vendor/libuv)
