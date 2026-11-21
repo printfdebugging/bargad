@@ -1,0 +1,53 @@
+{
+	"cmake.debugConfig": {
+		"type": "cppdbg",
+		"cwd": "${workspaceFolder}",
+		"MIMode": "gdb",
+		"miDebuggerPath": "C:\\msys64\\clang64\\bin\\gdb.exe",
+		"setupCommands": [
+			{
+				"description": "Enable pretty-printing for gdb",
+				"text": "-enable-pretty-printing",
+				"ignoreFailures": true
+			}
+		]
+	},
+	"cmake.additionalCompilerSearchDirs": [
+		"C:/msys64/mingw32/bin",
+		"C:/msys64/mingw64/bin",
+		"C:/msys64/clang32/bin",
+		"C:/msys64/clangarm64/bin",
+		"C:/msys64/ucrt64/bin"
+	],
+	"clangd.path": "C:\\msys64\\clang64\\bin\\clangd.exe",
+	"clang-format.executable": "C:\\msys64\\clang64\\bin\\clang-format.exe",
+	"terminal.integrated.defaultProfile.windows": "bash (MSYS2)",
+	"terminal.integrated.profiles.windows": {
+		"PowerShell": {
+			"source": "PowerShell",
+			"icon": "terminal-powershell"
+		},
+		"Command Prompt": {
+			"path": [
+				"${env:windir}\\Sysnative\\cmd.exe",
+				"${env:windir}\\System32\\cmd.exe"
+			],
+			"args": [],
+			"icon": "terminal-cmd"
+		},
+		"Git Bash": {
+			"source": "Git Bash"
+		},
+		"bash (MSYS2)": {
+			"path": "C:\\msys64\\usr\\bin\\bash.exe",
+			"args": [
+				"--login",
+				"-i"
+			],
+			"env": {
+				"MSYSTEM": "CLANG64",
+				"CHERE_INVOKING": "1"
+			}
+		}
+	}
+}

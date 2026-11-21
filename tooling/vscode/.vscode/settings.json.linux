@@ -1,0 +1,17 @@
+{
+	"cmake.debugConfig": {
+		"type": "cppdbg",
+		"cwd": "${workspaceFolder}",
+		"MIMode": "gdb",
+		"miDebuggerPath": "/usr/bin/gdb",
+		"setupCommands": [
+			{
+				"description": "Enable pretty-printing for gdb",
+				"text": "-enable-pretty-printing",
+				"ignoreFailures": true
+			}
+		]
+	},
+	"clangd.path": "/usr/bin/clangd",
+	"clang-format.executable": "/usr/bin/clang-format"
+}

@@ -1,0 +1,8 @@
+{
+	"cmake.debugConfig": {
+		"type": "lldb",
+		"cwd": "${workspaceFolder}"
+	},
+	"clangd.path": "/opt/homebrew/opt/llvm/bin/clangd",
+	"clang-format.executable": "/opt/homebrew/opt/llvm/bin/clang-format"
+}

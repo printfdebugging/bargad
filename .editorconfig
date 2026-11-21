@@ -1,0 +1,11 @@
+[*]
+indent_style = tab
+indent_size = tab
+
+[*.sh]
+indent_style = tab
+binary_next_line = true
+switch_case_indent = true
+
+[*.py]
+indent_style = space

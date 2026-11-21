@@ -1,0 +1,25 @@
+# Tooling
+**/.cache
+.vscode
+.qtcreator
+.clangd
+
+# CMake
+**/build
+**/install
+**/compile_commands.json
+
+# Misc
+gdb.txt
+gdb-output.txt
+tags
+tags-py
+
+# Output Artifacs
+*.data
+*.data.old
+*.tar.gz
+*.svg
+
+# Exceptions
+!/tooling/vscode/.vscode
