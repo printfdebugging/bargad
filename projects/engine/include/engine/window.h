@@ -36,8 +36,8 @@ struct window_options {
 GLFWwindow *window_create(struct window_options opts);
 
 void window_destroy(GLFWwindow *window);
-void window_poll_events();
 void window_get_bounds(GLFWwindow *window, int *width, int *height);
 void window_swap_buffers(GLFWwindow *window);
+void window_poll_events();
 
 #endif
