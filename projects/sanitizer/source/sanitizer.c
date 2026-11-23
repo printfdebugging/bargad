@@ -15,12 +15,12 @@ const char *
 __lsan_default_suppressions()
 {
 	return "leak:_glfwConnectX11\n"
-	       "leak:_glfwInitX11\n"
-	       "leak:getSystemContentScale\n"
-	       "leak:extensionSupportedGLX\n"
-	       "leak:_glfwInitGLX\n"
-	       "leak:_glfwCreateWindowX11\n"
-	       "leak:glfwCreateWindow\n";
+				 "leak:_glfwInitX11\n"
+				 "leak:getSystemContentScale\n"
+				 "leak:extensionSupportedGLX\n"
+				 "leak:_glfwInitGLX\n"
+				 "leak:_glfwCreateWindowX11\n"
+				 "leak:glfwCreateWindow\n";
 }
 
 const char *
