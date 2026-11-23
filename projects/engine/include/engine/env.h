@@ -53,6 +53,9 @@ env_deinit(__env)
 	pool_deinit(&env->pool);
 }
 
+#define env_strdup(string) env_strdup__impl(env, string)
+#define env_allocate(size) env_allocate__impl(env, size);
+
 /*!
  * @brief `env_strdup`
  * - Duplicates the string and returns a pointer to memory in `env.pool`
@@ -60,7 +63,7 @@ env_deinit(__env)
  */
 attribute_nonnull(1, 2)
 static inline char *
-env_strdup(__env, const char *string)
+env_strdup__impl(__env, const char *string)
 {
 	uint64_t length = strlen(string);
 	if (length == 0) {
@@ -80,7 +83,7 @@ env_strdup(__env, const char *string)
  */
 attribute_nonnull(1)
 static inline void *
-env_allocate(__env, uint64_t size)
+env_allocate__impl(__env, uint64_t size)
 {
 	return pool_allocate(&env->pool, size);
 }

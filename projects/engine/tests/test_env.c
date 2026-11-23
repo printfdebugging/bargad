@@ -16,7 +16,7 @@ static const char *dummy_text =
 static bool
 dummy_text_env_strdup(__env)
 {
-	const char *dummy_text_duplicate = env_strdup(env, dummy_text);
+	const char *dummy_text_duplicate = env_strdup(dummy_text);
 	if (!dummy_text_duplicate) {
 		LOG_ERROR("Got NULL from env_strdup\n");
 		return false;
