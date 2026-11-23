@@ -2,20 +2,21 @@ BasedOnStyle: Chromium
 
 # Indentation
 UseTab: ForContinuationAndIndentation
-IndentWidth: 8
-ContinuationIndentWidth: 8
-ConstructorInitializerIndentWidth: 8
-AccessModifierOffset: -8
+IndentWidth: 2
+TabWidth: 2
+ContinuationIndentWidth: 2
+ConstructorInitializerIndentWidth: 2
+AccessModifierOffset: -2
 IndentCaseLabels: true
 IndentPPDirectives: AfterHash
 IndentGotoLabels: NoIndent
 
 # Alignment
 AlignAfterOpenBracket: false
-AlignConsecutiveAssignments: true
+AlignConsecutiveAssignments: false
 AlignConsecutiveBitFields: true
 AlignConsecutiveDeclarations:
-  Enabled: true
+  Enabled: false
   AcrossEmptyLines: false
   AcrossComments: false
   AlignFunctionDeclarations: false
@@ -50,8 +51,8 @@ AlwaysBreakBeforeMultilineStrings: false
 # Single-line constructs
 AllowShortEnumsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: false
-AllowShortIfStatementsOnASingleLine: WithoutElse
-AllowShortLoopsOnASingleLine: true
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
 AllowShortCaseLabelsOnASingleLine: true
 
 # Argument and parameter packing
@@ -64,13 +65,13 @@ ExperimentalAutoDetectBinPacking: false
 
 # Spacing
 PointerAlignment: Right
-SpaceAfterCStyleCast: true
+SpaceAfterCStyleCast: false
 SpaceBeforeAssignmentOperators: true
 SpaceBeforeCpp11BracedList: true
 SpaceBeforeInheritanceColon: true
 SpaceBeforeParens: Custom
 SpaceBeforeParensOptions:
-  AfterControlStatements: true
+  AfterControlStatements: false
   AfterFunctionDefinitionName: false
   AfterForeachMacros: false
   AfterFunctionDeclarationName: false
