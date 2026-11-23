@@ -12,7 +12,7 @@ profiler_now_ms(void)
 {
 	struct timespec now;
 	timespec_get(&now, TIME_UTC);
-	return ((double) now.tv_sec * 1e3) + ((double) now.tv_nsec / 1e6);
+	return ((double)now.tv_sec * 1e3) + ((double)now.tv_nsec / 1e6);
 }
 
 /*!
@@ -23,12 +23,12 @@ profiler_now_ms(void)
  */
 #define profiler_profile_max(block_name, max_allowed_ms) \
 	static struct profiler_slot __profiler_slot_name = { \
-		.name     = (block_name), \
-		.file     = __FILE__, \
-		.line     = __LINE__, \
+		.name = (block_name), \
+		.file = __FILE__, \
+		.line = __LINE__, \
 		.ms.limit = (max_allowed_ms) \
 	}; \
-	for (double start = profiler_now_ms(), elapsed = -1; elapsed < 0; elapsed = profiler_now_ms() - start, profiler_add(&__profiler_slot_name, elapsed))
+	for(double start = profiler_now_ms(), elapsed = -1; elapsed < 0; elapsed = profiler_now_ms() - start, profiler_add(&__profiler_slot_name, elapsed))
 
 /*!
  * @brief `profiler_profile`
@@ -39,7 +39,7 @@ profiler_now_ms(void)
 struct profiler_slot {
 	const char *name;
 	const char *file;
-	const int   line;
+	const int line;
 
 	struct {
 		double limit;
@@ -47,7 +47,7 @@ struct profiler_slot {
 		double max;
 	} ms;
 
-	long                  call_count;
+	long call_count;
 	struct profiler_slot *next;
 };
 

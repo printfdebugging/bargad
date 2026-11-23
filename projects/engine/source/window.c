@@ -26,7 +26,7 @@ window_create(struct window_options opts)
 	LOG_ERROR("We do not support APPLE as APPLE doesn't support OpenGL 4.6\n");
 	return NULL;
 #else
-	if (!glfwInit()) {
+	if(!glfwInit()) {
 		LOG_ERROR("Failed to initialize glfw\n");
 		return NULL;
 	}
@@ -34,18 +34,18 @@ window_create(struct window_options opts)
 	window_set_hints(opts);
 
 	GLFWwindow *window = glfwCreateWindow(opts.properties.width, opts.properties.height, opts.properties.title, NULL, NULL);
-	if (!window) {
+	if(!window) {
 		glfwTerminate();
 		return NULL;
 	}
 
 	glfwMakeContextCurrent(window);
-	gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	glfwSwapInterval(1);
 
 #	if defined(_WIN32)
-	HWND  hwnd  = glfwGetWin32Window(window);
+	HWND hwnd = glfwGetWin32Window(window);
 	DWORD value = windows_get_dark_mode();
 	DwmSetWindowAttribute(hwnd, DWMWA_USE_IMMERSIVE_DARK_MODE, &value, sizeof(value));
 #	endif
@@ -60,7 +60,7 @@ window_create(struct window_options opts)
 void
 window_get_bounds(GLFWwindow *window, int *width, int *height)
 {
-	if (!window) {
+	if(!window) {
 		LOG_ERROR("Received a NULL window argument\n");
 		return;
 	}
@@ -124,7 +124,7 @@ window_setup_debug_callback()
 {
 	int32_t context_flags;
 	glGetIntegerv(GL_CONTEXT_FLAGS, &context_flags);
-	if (context_flags & GL_CONTEXT_FLAG_DEBUG_BIT) {
+	if(context_flags & GL_CONTEXT_FLAG_DEBUG_BIT) {
 		glEnable(GL_DEBUG_OUTPUT);
 		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
 		glDebugMessageCallback(opengl_debug_callback, NULL);
@@ -136,7 +136,7 @@ static void
 opengl_debug_callback(uint32_t source, uint32_t type, uint32_t id, uint32_t severity, int32_t length, const char *message, const void *user_param)
 {
 	const char *debug_source;
-	switch (source) {
+	switch(source) {
 		case GL_DEBUG_SOURCE_API:             debug_source = "source: API"; break;
 		case GL_DEBUG_SOURCE_WINDOW_SYSTEM:   debug_source = "source: WINDOW_SYSTEM"; break;
 		case GL_DEBUG_SOURCE_SHADER_COMPILER: debug_source = "source: SHADER_COMPILER"; break;
@@ -146,7 +146,7 @@ opengl_debug_callback(uint32_t source, uint32_t type, uint32_t id, uint32_t seve
 	}
 
 	const char *debug_type;
-	switch (type) {
+	switch(type) {
 		case GL_DEBUG_TYPE_ERROR:               debug_type = "type: ERROR"; break;
 		case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR: debug_type = "type: DEPRECATED_BEHAVIOR"; break;
 		case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:  debug_type = "type: UNDEFINED_BEHAVIOR"; break;
@@ -158,7 +158,7 @@ opengl_debug_callback(uint32_t source, uint32_t type, uint32_t id, uint32_t seve
 		case GL_DEBUG_TYPE_OTHER:               debug_type = "type: OTHER"; break;
 	}
 
-	switch (severity) {
+	switch(severity) {
 		case GL_DEBUG_SEVERITY_HIGH:         LOG_ERROR("[%s] [%s] message: %s\n", debug_source, debug_type, message); break;
 		case GL_DEBUG_SEVERITY_MEDIUM:       LOG_ERROR("[%s] [%s] message: %s\n", debug_source, debug_type, message); break;
 		case GL_DEBUG_SEVERITY_LOW:          LOG_WARNING("[%s] [%s] message: %s\n", debug_source, debug_type, message); break;
@@ -172,7 +172,7 @@ static bool
 windows_get_dark_mode()
 {
 	HINSTANCE ux_theme_lib = LoadLibraryExW(L"uxtheme.dll", NULL, LOAD_LIBRARY_SEARCH_SYSTEM32);
-	if (!ux_theme_lib) {
+	if(!ux_theme_lib) {
 		LOG_WARNING("Failed to load uxtheme.dll, setting dark mode as the default\n");
 		return true;
 	}

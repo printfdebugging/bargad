@@ -49,18 +49,18 @@ os_free(void *chunk)
 struct os_sysinfo
 os_sysinfo(void)
 {
-	uint64_t pages     = (uint64_t) sysconf(_SC_PHYS_PAGES);
-	uint64_t page_size = (uint64_t) sysconf(_SC_PAGESIZE);
+	uint64_t pages = (uint64_t)sysconf(_SC_PHYS_PAGES);
+	uint64_t page_size = (uint64_t)sysconf(_SC_PAGESIZE);
 
 	struct sysinfo usysinfo = {};
 	sysinfo(&usysinfo);
 
 	struct os_sysinfo info = {
-		.procs  = (uint32_t) get_nprocs(),
+		.procs = (uint32_t)get_nprocs(),
 		.memory = {
-			.total     = pages * page_size,
-			.free      = usysinfo.freeram,
-			.page_size = (uint64_t) getpagesize(),
+			.total = pages * page_size,
+			.free = usysinfo.freeram,
+			.page_size = (uint64_t)getpagesize(),
 		},
 	};
 
@@ -71,7 +71,7 @@ void *
 os_mmap(uint64_t size)
 {
 	void *chunk = mmap(0, size, PROT_NONE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-	if (chunk == MAP_FAILED) {
+	if(chunk == MAP_FAILED) {
 		LOG_ERROR("mmap returned MAP_FAILED for size: %" PRIu64 "\n", size);
 		os_info_log();
 		return NULL;
@@ -96,16 +96,16 @@ os_munmap(void *chunk, uint64_t size)
 struct os_sysinfo
 os_sysinfo(void)
 {
-	SYSTEM_INFO    system = {};
+	SYSTEM_INFO system = {};
 	MEMORYSTATUSEX memory = { .dwLength = sizeof(MEMORYSTATUSEX) };
 	GetSystemInfo(&system);
 	GlobalMemoryStatusEx(&memory);
 
 	struct os_sysinfo info = {
-		.procs  = system.dwNumberOfProcessors,
+		.procs = system.dwNumberOfProcessors,
 		.memory = {
-			.total     = memory.ullTotalPhys,
-			.free      = memory.ullAvailPhys,
+			.total = memory.ullTotalPhys,
+			.free = memory.ullAvailPhys,
 			.page_size = system.dwPageSize,
 		},
 	};
@@ -128,7 +128,7 @@ os_mprotect(void *chunk, uint64_t size)
 void
 os_munmap(void *chunk, uint64_t size)
 {
-	(void) size;
+	(void)size;
 	VirtualFree(chunk, 0, MEM_RELEASE);
 }
 

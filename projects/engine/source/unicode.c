@@ -34,13 +34,13 @@
 uint8_t
 uc_utf8_bytelen(uint8_t b)
 {
-	if ((b & 0b11111000) == b4)
+	if((b & 0b11111000) == b4)
 		return 4;
-	if ((b & 0b11110000) == b3)
+	if((b & 0b11110000) == b3)
 		return 3;
-	if ((b & 0b11100000) == b2)
+	if((b & 0b11100000) == b2)
 		return 2;
-	if ((b & 0b10000000) == b1)
+	if((b & 0b10000000) == b1)
 		return 1;
 	return 0;
 }
@@ -48,13 +48,13 @@ uc_utf8_bytelen(uint8_t b)
 uint8_t
 uc_rune_bytelen(uint32_t rune)
 {
-	if (rune < 0x0000007F)
+	if(rune < 0x0000007F)
 		return 1;
-	if (0x00000080 < rune && rune < 0x000007FF)
+	if(0x00000080 < rune && rune < 0x000007FF)
 		return 2;
-	if (0x00000800 < rune && rune < 0x0000FFFF)
+	if(0x00000800 < rune && rune < 0x0000FFFF)
 		return 3;
-	if (0x00010000 < rune && rune < 0x0010FFFF)
+	if(0x00010000 < rune && rune < 0x0010FFFF)
 		return 4;
 	return 0;
 }
@@ -62,16 +62,16 @@ uc_rune_bytelen(uint32_t rune)
 void
 uc_utf8_encode(uint32_t rune, uint8_t bytelen, uint8_t *utf8)
 {
-	if (bytelen == 1) {
-		utf8[0] = (uint8_t) rune;
-	} else if (bytelen == 2) {
+	if(bytelen == 1) {
+		utf8[0] = (uint8_t)rune;
+	} else if(bytelen == 2) {
 		utf8[0] = b2 | ((rune >> 06) & mask2);
 		utf8[1] = bx | (rune & maskx);
-	} else if (bytelen == 3) {
+	} else if(bytelen == 3) {
 		utf8[0] = b3 | ((rune >> 12) & mask3);
 		utf8[1] = bx | ((rune >> 06) & maskx);
 		utf8[2] = bx | (rune & maskx);
-	} else if (bytelen == 4) {
+	} else if(bytelen == 4) {
 		utf8[0] = b4 | ((rune >> 18) & mask4);
 		utf8[1] = bx | ((rune >> 12) & maskx);
 		utf8[2] = bx | ((rune >> 06) & maskx);
@@ -83,24 +83,24 @@ uint32_t
 uc_utf8_decode(const uint8_t *utf8, uint8_t bytelen)
 {
 	uint32_t rune = 0;
-	switch (bytelen) {
+	switch(bytelen) {
 		case 4: {
-			rune |= (uint32_t) ((utf8[0] & mask4) << 18 |
+			rune |= (uint32_t)((utf8[0] & mask4) << 18 |
 				(utf8[1] & maskx) << 12 |
 				(utf8[2] & maskx) << 6 |
 				(utf8[3] & maskx));
 		} break;
 		case 3: {
-			rune |= (uint32_t) ((utf8[0] & mask3) << 12 |
+			rune |= (uint32_t)((utf8[0] & mask3) << 12 |
 				(utf8[1] & maskx) << 6 |
 				(utf8[2] & maskx));
 		} break;
 		case 2: {
-			rune |= (uint32_t) ((utf8[0] & mask2) << 6 |
+			rune |= (uint32_t)((utf8[0] & mask2) << 6 |
 				(utf8[1] & maskx));
 		} break;
 		case 1: {
-			rune |= ((uint32_t) utf8[0]);
+			rune |= ((uint32_t)utf8[0]);
 		} break;
 	}
 
@@ -110,14 +110,14 @@ uc_utf8_decode(const uint8_t *utf8, uint8_t bytelen)
 uint32_t
 uc_rune_count(uint8_t *utf8, uint32_t bytelen)
 {
-	uint32_t runelen    = 0;
-	uint8_t  byteseqlen = 0;
-	for (uint32_t index = 0; index < bytelen; index += byteseqlen, ++runelen) {
-		if ((byteseqlen = uc_utf8_bytelen(utf8[index])) == 0)
+	uint32_t runelen = 0;
+	uint8_t byteseqlen = 0;
+	for(uint32_t index = 0; index < bytelen; index += byteseqlen, ++runelen) {
+		if((byteseqlen = uc_utf8_bytelen(utf8[index])) == 0)
 			return 0;
-		if (bytelen - index < byteseqlen)
+		if(bytelen - index < byteseqlen)
 			return 0;
-		if (!uc_valid_utf8(utf8 + index, byteseqlen))
+		if(!uc_valid_utf8(utf8 + index, byteseqlen))
 			return 0;
 	}
 	return runelen;
@@ -127,8 +127,8 @@ uint32_t
 uc_byte_count(uint32_t *rune, uint32_t runelen)
 {
 	uint32_t bytecount = 0;
-	for (uint32_t runeidx = 0, bytelen = 0; runeidx < runelen; bytecount += bytelen, ++runeidx)
-		if ((bytelen = uc_rune_bytelen(rune[runeidx])) == 0)
+	for(uint32_t runeidx = 0, bytelen = 0; runeidx < runelen; bytecount += bytelen, ++runeidx)
+		if((bytelen = uc_rune_bytelen(rune[runeidx])) == 0)
 			return 0;
 	return bytecount;
 }
@@ -137,12 +137,12 @@ bool
 uc_utf8_decode_stream(uint8_t *utf8, uint32_t bytelen, uint32_t *runes, uint32_t runelen)
 {
 	uint8_t byteseqlen = 0;
-	for (uint32_t runeidx = 0, byteidx = 0; runeidx < runelen; ++runeidx, byteidx += byteseqlen) {
-		if ((byteseqlen = uc_utf8_bytelen(utf8[byteidx])) == 0)
+	for(uint32_t runeidx = 0, byteidx = 0; runeidx < runelen; ++runeidx, byteidx += byteseqlen) {
+		if((byteseqlen = uc_utf8_bytelen(utf8[byteidx])) == 0)
 			return false;
-		if (bytelen - byteidx < byteseqlen)
+		if(bytelen - byteidx < byteseqlen)
 			return false;
-		if (!uc_valid_utf8(utf8 + byteidx, byteseqlen))
+		if(!uc_valid_utf8(utf8 + byteidx, byteseqlen))
 			return false;
 		runes[runeidx] = uc_utf8_decode(utf8 + byteidx, byteseqlen);
 	}
@@ -153,8 +153,8 @@ bool
 uc_utf8_encode_stream(uint32_t *runes, uint32_t runelen, uint8_t *utf8)
 {
 	uint8_t byteseqlen = 0;
-	for (uint32_t runeidx = 0, byteidx = 0; runeidx < runelen; ++runeidx, byteidx += byteseqlen) {
-		if ((byteseqlen = uc_rune_bytelen(runes[runeidx])) == 0)
+	for(uint32_t runeidx = 0, byteidx = 0; runeidx < runelen; ++runeidx, byteidx += byteseqlen) {
+		if((byteseqlen = uc_rune_bytelen(runes[runeidx])) == 0)
 			return false;
 		uc_utf8_encode(runes[runeidx], byteseqlen, utf8 + byteidx);
 	}
@@ -181,7 +181,7 @@ uc_utf8_encode_stream(uint32_t *runes, uint32_t runelen, uint8_t *utf8)
 bool
 uc_valid_utf8(uint8_t *utf8, uint8_t bytelen)
 {
-	switch (bytelen) {
+	switch(bytelen) {
 		case 1:
 			return byte_in_range(utf8[0], 0x00, 0x7f);
 		case 2:
@@ -205,12 +205,12 @@ bool
 uc_valid_utf8_stream(uint8_t *utf8, uint32_t bytelen)
 {
 	uint8_t byteseqlen = 0;
-	for (uint32_t byteidx = 0; byteidx < bytelen; byteidx += byteseqlen) {
-		if ((byteseqlen = uc_utf8_bytelen(utf8[byteidx])) == 0)
+	for(uint32_t byteidx = 0; byteidx < bytelen; byteidx += byteseqlen) {
+		if((byteseqlen = uc_utf8_bytelen(utf8[byteidx])) == 0)
 			return false;
-		if (bytelen - byteidx < byteseqlen)
+		if(bytelen - byteidx < byteseqlen)
 			return 0;
-		if (!uc_valid_utf8(utf8 + byteidx, byteseqlen))
+		if(!uc_valid_utf8(utf8 + byteidx, byteseqlen))
 			return false;
 	}
 	return true;

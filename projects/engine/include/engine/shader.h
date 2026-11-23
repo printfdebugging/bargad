@@ -28,12 +28,12 @@
  * - Calls `glBindAttribLocation` on `attributes` before linking
  */
 uint32_t shader_program_create(
-	const char **vertex,         /*! @param vertex    	       - an array of strings comprising the vertex shader source */
-	int32_t      vertex_size,    /*! @param vertex_size       - number of strings in vertex_sources array */
-	const char **fragment,       /*! @param fragment          - an array of strings comprising the fragment shader source */
-	int32_t      fragment_size,  /*! @param fragment_size     - number of strings in fragment_sources array */
-	const char **attributes,     /*! @param attributes        - an array of strings mapping the position to the attribute location in a vertex shader */
-	uint32_t     attributes_size /*! @param attributes_size   - number of strings in attributes array */
+	const char **vertex,     /*! @param vertex    	       - an array of strings comprising the vertex shader source */
+	int32_t vertex_size,     /*! @param vertex_size       - number of strings in vertex_sources array */
+	const char **fragment,   /*! @param fragment          - an array of strings comprising the fragment shader source */
+	int32_t fragment_size,   /*! @param fragment_size     - number of strings in fragment_sources array */
+	const char **attributes, /*! @param attributes        - an array of strings mapping the position to the attribute location in a vertex shader */
+	uint32_t attributes_size /*! @param attributes_size   - number of strings in attributes array */
 );
 
 /*!
@@ -52,7 +52,7 @@ shader_program_use(uint32_t program)
 {
 	extern uint32_t shader_program_current;
 
-	if (program != shader_program_current) {
+	if(program != shader_program_current) {
 		glUseProgram(program);
 		shader_program_current = program;
 	}

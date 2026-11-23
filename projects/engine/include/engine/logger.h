@@ -9,7 +9,7 @@
 			fprintf(stderr, "\033[0;" color "m" level ": %s: ", __func__); \
 			fprintf(stderr, __VA_ARGS__); \
 			fprintf(stderr, "\033[0m"); \
-		} while (0)
+		} while(0)
 
 #	define LOG_INFO(...)    LOG("[INFO]   ", "34", __VA_ARGS__)
 #	define LOG_WARNING(...) LOG("[WARNING]", "33", __VA_ARGS__)

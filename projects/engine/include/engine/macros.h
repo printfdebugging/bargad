@@ -8,6 +8,6 @@
 #define lengthof(s)        (countof(s) - 1)
 #define is_power_of_two(x) (x && !(x & (x - 1)))
 
-#define valueof(type, ptr, off) *(((type *) (void *) ptr) + off)
+#define valueof(type, ptr, off) *(((type *)(void *)ptr) + off)
 
 #endif
