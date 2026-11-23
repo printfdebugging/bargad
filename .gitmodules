@@ -22,3 +22,6 @@
 [submodule "libuv"]
 	path = vendor/libuv
 	url = https://github.com/debuffio/libuv
+[submodule "gltf-sample-assets"]
+	path = vendor/gltf-sample-assets
+	url = https://github.com/debuffio/glTF-Sample-Assets
