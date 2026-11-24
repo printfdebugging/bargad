@@ -6,11 +6,13 @@
 #include <stddef.h>
 #include <stdint.h>
 
-struct pool {
+struct pool
+{
 	uint8_t *beg;
 	uint8_t *cur;
 	uint8_t *end;
-	struct pool_options {
+	struct pool_options
+	{
 		uint64_t alignment;
 		uint64_t chunksize;
 		uint64_t reserve;

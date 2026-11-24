@@ -7,7 +7,8 @@
 
 #include <string.h>
 
-struct env_options {
+struct env_options
+{
 	struct pool_options pool_options;
 };
 
@@ -16,7 +17,8 @@ struct env_options {
  * - Keeps the state associated with one entity/subsystem
  * - eg: allocators, libuv state/callbacks etc..
  */
-struct env {
+struct env
+{
 	struct pool pool;
 };
 
@@ -37,7 +39,8 @@ env_init(__env, struct env_options options)
 	bool initialization_failed =
 		!pool_init(&env->pool, options.pool_options);
 
-	if(initialization_failed) {
+	if(initialization_failed)
+	{
 		LOG_FATAL("Failed to initialize env\n");
 	}
 }
@@ -66,7 +69,8 @@ static inline char *
 env_strdup__impl(__env, const char *string)
 {
 	uint64_t length = strlen(string);
-	if(length == 0) {
+	if(length == 0)
+	{
 		LOG_ERROR("Got 0 from strlen\n");
 		return NULL;
 	}

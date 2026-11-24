@@ -120,9 +120,11 @@ int
 test_unicode_utf8_invalid_byte_sequences([[maybe_unused]] int argc, [[maybe_unused]] char *argv[])
 {
 	uint32_t data_length = sizeof(utf8_invalid_byte_sequences) / sizeof(struct uint8_t *);
-	for(uint32_t dataidx = 0; dataidx < data_length; ++dataidx) {
+	for(uint32_t dataidx = 0; dataidx < data_length; ++dataidx)
+	{
 		uint8_t *bytes = utf8_invalid_byte_sequences[dataidx];
-		if(uc_valid_utf8_stream(bytes, (uint32_t)strlen((char *)bytes))) {
+		if(uc_valid_utf8_stream(bytes, (uint32_t)strlen((char *)bytes)))
+		{
 			fprintf(stderr, "valid_utf8 falsely reported '%s' as valid utf8\n", bytes);
 			return EXIT_FAILURE;
 		}

@@ -17,18 +17,21 @@ static bool
 dummy_text_env_strdup(__env)
 {
 	const char *dummy_text_duplicate = env_strdup(dummy_text);
-	if(!dummy_text_duplicate) {
+	if(!dummy_text_duplicate)
+	{
 		LOG_ERROR("Got NULL from env_strdup\n");
 		return false;
 	}
 
-	if(strcmp(dummy_text, dummy_text_duplicate) != 0) {
+	if(strcmp(dummy_text, dummy_text_duplicate) != 0)
+	{
 		LOG_ERROR("Got non-zero strcmp for dummy_text and env_strdup(env, dummy_text)\n");
 		return false;
 	}
 
 	uint64_t length = strlen(dummy_text);
-	if(length == 0 || dummy_text_duplicate[length] != '\0') {
+	if(length == 0 || dummy_text_duplicate[length] != '\0')
+	{
 		LOG_ERROR("Got a non-null terminated string from env_strdup\n");
 		return false;
 	}
@@ -53,7 +56,8 @@ test_env(int argc, char *argv[])
 	bool failed = !dummy_text_env_strdup(&env);
 	env_deinit(&env);
 
-	if(failed) {
+	if(failed)
+	{
 		LOG_ERROR("Failed\n");
 		return EXIT_FAILURE;
 	}

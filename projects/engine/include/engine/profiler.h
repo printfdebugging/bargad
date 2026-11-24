@@ -36,12 +36,14 @@ profiler_now_ms(void)
 #define profiler_profile(block_name) \
 	profiler_profile_max(block_name, 0.0)
 
-struct profiler_slot {
+struct profiler_slot
+{
 	const char *name;
 	const char *file;
 	const int line;
 
-	struct {
+	struct
+	{
 		double limit;
 		double total;
 		double max;

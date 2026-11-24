@@ -5,7 +5,8 @@
 #	include <stdio.h>
 
 #	define LOG(level, color, ...) \
-		do { \
+		do \
+		{ \
 			fprintf(stderr, "\033[0;" color "m" level ": %s: ", __func__); \
 			fprintf(stderr, __VA_ARGS__); \
 			fprintf(stderr, "\033[0m"); \

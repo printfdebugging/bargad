@@ -52,7 +52,8 @@ shader_program_use(uint32_t program)
 {
 	extern uint32_t shader_program_current;
 
-	if(program != shader_program_current) {
+	if(program != shader_program_current)
+	{
 		glUseProgram(program);
 		shader_program_current = program;
 	}

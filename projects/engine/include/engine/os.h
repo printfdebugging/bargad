@@ -5,9 +5,11 @@
 
 #include <stdint.h>
 
-struct os_sysinfo {
+struct os_sysinfo
+{
 	uint32_t procs;
-	struct {
+	struct
+	{
 		uint64_t total;
 		uint64_t free;
 		uint64_t page_size;

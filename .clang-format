@@ -29,7 +29,7 @@ AlignOperands: DontAlign
 AlignTrailingComments: true
 
 # Brackets and braces
-BreakBeforeBraces: Linux
+BreakBeforeBraces: Allman
 BreakAfterOpenBracketIf: true
 BreakAfterOpenBracketFunction: true
 BreakAfterOpenBracketBracedList: true

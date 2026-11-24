@@ -9,7 +9,8 @@
 #include <inttypes.h>
 #include <stdlib.h>
 
-struct thread_context {
+struct thread_context
+{
 	uint64_t number;
 	struct pool pool;
 };
@@ -18,7 +19,8 @@ void
 thread_writer(void *arg)
 {
 	struct thread_context *ctx = arg;
-	for(uint64_t idx = 0; idx < 16'000; ++idx) {
+	for(uint64_t idx = 0; idx < 16'000; ++idx)
+	{
 		uint64_t *integer = pool_allocate(&ctx->pool, sizeof(uint64_t));
 		*integer = idx;
 	}
@@ -28,9 +30,11 @@ void
 thread_reader(void *arg)
 {
 	struct thread_context *ctx = arg;
-	for(uint64_t idx = 0; idx < 16'000; ++idx) {
+	for(uint64_t idx = 0; idx < 16'000; ++idx)
+	{
 		uint64_t integer = valueof(uint64_t, ctx->pool.beg, idx);
-		if(integer != idx) {
+		if(integer != idx)
+		{
 			LOG_ERROR("integer %" PRIu64 " is not the same as idx %" PRIu64 " in thread %" PRIu64 "\n", integer, idx, ctx->number);
 			exit(1);
 		}
@@ -50,7 +54,8 @@ test_allocator_pool_threading(int argc, char *argv[])
 		.reserve = 1u * MB,
 	};
 
-	for(uint64_t proc = 0; proc < procs; ++proc) {
+	for(uint64_t proc = 0; proc < procs; ++proc)
+	{
 		contexts[proc].number = proc;
 		if(!pool_init(&contexts[proc].pool, options))
 			return EXIT_FAILURE;

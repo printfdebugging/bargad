@@ -7,14 +7,17 @@
 
 struct window_userdata;
 
-struct window_options {
-	struct window_properties {
+struct window_options
+{
+	struct window_properties
+	{
 		int32_t width;
 		int32_t height;
 		const char *title;
 	} properties;
 
-	struct window_callbacks {
+	struct window_callbacks
+	{
 		GLFWcursorposfun cursor_position;
 		GLFWscrollfun scroll;
 		GLFWframebuffersizefun framebuffer_resize;
@@ -22,7 +25,8 @@ struct window_options {
 		GLFWerrorfun error;
 	} callbacks;
 
-	struct window_attributes {
+	struct window_attributes
+	{
 		bool resizable;
 		bool scalable;
 		bool decorated;

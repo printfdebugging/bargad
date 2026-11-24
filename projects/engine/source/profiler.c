@@ -28,7 +28,8 @@ static const char profiler_report_footer[] =
 void
 profiler_add(struct profiler_slot *slot, double ms_elapsed)
 {
-	if(slot->call_count == 0) {
+	if(slot->call_count == 0)
+	{
 		slot->next = profiler_slots;
 		profiler_slots = slot;
 	}
@@ -45,16 +46,16 @@ profiler_add(struct profiler_slot *slot, double ms_elapsed)
 void
 profiler_frame(void)
 {
-	if(profiler_frame_count == 0) {
+	if(profiler_frame_count == 0)
 		profiler_start_ms = profiler_now_ms();
-	}
 	profiler_frame_count++;
 }
 
 void
 profiler_report(void)
 {
-	if(profiler_frame_count == 0) {
+	if(profiler_frame_count == 0)
+	{
 		LOG_WARNING("profiler_frame_count is 0, please call profiler_frame each frame\n");
 		return;
 	}
@@ -62,7 +63,8 @@ profiler_report(void)
 	double frame_ms = (profiler_now_ms() - profiler_start_ms) / (double)profiler_frame_count;
 	printf(profiler_report_header, frame_ms, 1000.0 / frame_ms, profiler_frame_count);
 
-	for(struct profiler_slot *slot = profiler_slots; slot; slot = slot->next) {
+	for(struct profiler_slot *slot = profiler_slots; slot; slot = slot->next)
+	{
 		double ms_per_frame = slot->ms.total / (double)profiler_frame_count;
 		printf(profiler_report_row, slot->name, ms_per_frame, ms_per_frame / frame_ms * 100.0, slot->ms.max, slot->call_count);
 	}

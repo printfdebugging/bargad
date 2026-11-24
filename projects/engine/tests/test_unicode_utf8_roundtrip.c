@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct utf8_roundtrip {
+struct utf8_roundtrip
+{
 	uint8_t *utf8;
 	uint8_t bytes[256];
 	uint32_t runes[256];
@@ -92,28 +93,34 @@ test_unicode_utf8_roundtrip([[maybe_unused]] int argc, [[maybe_unused]] char *ar
 	uint32_t *runes = NULL;
 	uint8_t *bytes = NULL;
 
-	for(dataidx = 0; dataidx < data_length; ++dataidx) {
+	for(dataidx = 0; dataidx < data_length; ++dataidx)
+	{
 		runes = NULL;
 		bytes = NULL;
 		/* utf8 to rune */
 		uint32_t runelen = uc_rune_count(data[dataidx].utf8, data[dataidx].bytelen);
-		if(runelen != data[dataidx].runelen) {
+		if(runelen != data[dataidx].runelen)
+		{
 			fprintf(stderr, "ERROR: rune_count returned the wrong count. expected %i, got %i\n", data[dataidx].runelen, runelen);
 			goto failure;
 		}
 
-		if(!(runes = calloc(runelen, sizeof(uint32_t)))) {
+		if(!(runes = calloc(runelen, sizeof(uint32_t))))
+		{
 			fprintf(stderr, "ERROR: failed to allocate buffer for runes\n");
 			goto failure;
 		}
 
-		if(!(uc_utf8_decode_stream(data[dataidx].utf8, data[dataidx].bytelen, runes, runelen))) {
+		if(!(uc_utf8_decode_stream(data[dataidx].utf8, data[dataidx].bytelen, runes, runelen)))
+		{
 			fprintf(stderr, "ERROR: uc_utf8_decode_stream returned 0\n");
 			goto failure;
 		}
 
-		for(uint32_t runeidx = 0; runeidx < runelen; ++runeidx) {
-			if(runes[runeidx] != data[dataidx].runes[runeidx]) {
+		for(uint32_t runeidx = 0; runeidx < runelen; ++runeidx)
+		{
+			if(runes[runeidx] != data[dataidx].runes[runeidx])
+			{
 				fprintf(stderr, "ERROR: runes at index %i do not match. expected %i, got %i\n", runeidx, data[dataidx].runes[runeidx], runes[runeidx]);
 				goto failure;
 			}
@@ -121,23 +128,28 @@ test_unicode_utf8_roundtrip([[maybe_unused]] int argc, [[maybe_unused]] char *ar
 
 		/* rune to utf8 */
 		uint32_t bytelen = uc_byte_count(data[dataidx].runes, data[dataidx].runelen);
-		if(bytelen != data[dataidx].bytelen) {
+		if(bytelen != data[dataidx].bytelen)
+		{
 			fprintf(stderr, "ERROR: uc_byte_count returned the wrong count. expected %i, got %i\n", data[dataidx].bytelen, bytelen);
 			goto failure;
 		}
 
-		if(!(bytes = calloc(bytelen, sizeof(uint8_t)))) {
+		if(!(bytes = calloc(bytelen, sizeof(uint8_t))))
+		{
 			fprintf(stderr, "ERROR: failed to allocate buffer for bytes\n");
 			goto failure;
 		}
 
-		if(!(uc_utf8_encode_stream(data[dataidx].runes, data[dataidx].runelen, bytes))) {
+		if(!(uc_utf8_encode_stream(data[dataidx].runes, data[dataidx].runelen, bytes)))
+		{
 			fprintf(stderr, "ERROR: uc_utf8_encode_stream returned 0\n");
 			goto failure;
 		}
 
-		for(uint32_t byteidx = 0; byteidx < runelen; ++byteidx) {
-			if(bytes[byteidx] != data[dataidx].bytes[byteidx]) {
+		for(uint32_t byteidx = 0; byteidx < runelen; ++byteidx)
+		{
+			if(bytes[byteidx] != data[dataidx].bytes[byteidx])
+			{
 				fprintf(stderr, "ERROR: bytes at index %i do not match. expected %i, got %i\n", byteidx, data[dataidx].bytes[byteidx], bytes[byteidx]);
 				goto failure;
 			}

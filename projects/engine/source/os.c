@@ -71,7 +71,8 @@ void *
 os_mmap(uint64_t size)
 {
 	void *chunk = mmap(0, size, PROT_NONE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-	if(chunk == MAP_FAILED) {
+	if(chunk == MAP_FAILED)
+	{
 		LOG_ERROR("mmap returned MAP_FAILED for size: %" PRIu64 "\n", size);
 		os_info_log();
 		return NULL;
