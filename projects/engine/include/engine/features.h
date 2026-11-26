@@ -19,4 +19,11 @@
 #	define attribute_nonnull(n)
 #endif
 
+#if __has_attribute(unused)
+#	define attribute_maybe_unused [[maybe_unused]]
+#else
+#	define attribute_maybe_unused
+#endif
+
+
 #endif

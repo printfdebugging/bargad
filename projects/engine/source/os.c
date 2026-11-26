@@ -1,5 +1,6 @@
 #include "engine/os.h"
 #include "engine/constants.h"
+#include "engine/features.h"
 #include "engine/logger.h"
 
 #include <inttypes.h>
@@ -14,6 +15,7 @@
 #	include <sysinfoapi.h>
 #endif
 
+attribute_maybe_unused
 inline static void
 os_info_log()
 {

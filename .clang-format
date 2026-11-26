@@ -86,10 +86,8 @@ SortIncludes:
   FilesBeforeFolders: true
 SortUsingDeclarations: true
 
-AttributeMacros: [
-  'attribute_malloc',
-  'attribute_alloc_size',
-]
+AttributeMacros:
+  ['attribute_malloc', 'attribute_alloc_size', 'attribute_maybe_unused']
 
 Macros:
   - 'attribute_malloc=[[gnu::malloc]]'
@@ -99,3 +97,4 @@ Macros:
   - 'attribute_nonnull(a,b)=[[gnu::nonnull(a,b)]]'
   - 'attribute_nonnull(a,b,c)=[[gnu::nonnull(a,b,c)]]'
   - 'attribute_nonnull(a,b,c,d)=[[gnu::nonnull(a,b,c,d)]]'
+  - 'attribute_maybe_unused=[[maybe_unused]]'
