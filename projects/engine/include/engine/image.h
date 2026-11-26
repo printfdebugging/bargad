@@ -31,9 +31,8 @@ image_format_from_channels(int channels)
 /*!
  * @brief
  * - Loads an image, flipped vertically
- * - Returns `false` on load failure, `true` on success
  */
-bool image_init_from_file(struct image *image, const char *filepath);
+void image_init_from_file(struct image *image, const char *filepath);
 
 /*!
  * @brief
