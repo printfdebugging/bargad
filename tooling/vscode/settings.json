@@ -17,9 +17,21 @@
 	"workbench.layoutControl.enabled": false,
 	"workbench.editor.empty.hint": "hidden",
 	"workbench.startupEditor": "none",
-	"workbench.colorTheme": "Solarized Monochrome Dark",
 	"workbench.tips.enabled": false,
 	"editor.minimap.enabled": false,
+	"editor.hover.enabled": false,
+	"editor.quickSuggestions": {
+		"other": "off",
+		"comments": "off",
+		"strings": "off"
+	},
+	"editor.suggestOnTriggerCharacters": false,
+	"editor.inlineSuggest.enabled": false,
+	"editor.parameterHints.enabled": false,
+	"editor.wordBasedSuggestions": "off",
+	"editor.renderValidationDecorations": "off",
+	"problems.decorations.enabled": false,
+	"editor.glyphMargin": true,
 	"breadcrumbs.enabled": false,
 	"editor.stickyScroll.enabled": false,
 	"editor.lightbulb.enabled": "off",
@@ -39,8 +51,7 @@
 	"editor.occurrencesHighlight": "off",
 	"editor.guides.bracketPairs": "off",
 	"editor.guides.bracketPairsHorizontal": false,
-	"editor.parameterHints.enabled": true,
-	"editor.inlineSuggest.enabled": true,
+	"editor.bracketPairColorization.enabled": false,
 	"editor.formatOnSave": true,
 	"terminal.integrated.cwd": "${workspaceFolder}",
 	"workbench.iconTheme": "vscode-great-icons",
@@ -65,8 +76,13 @@
 	"vim.leader": "<space>",
 	"vim.normalModeKeyBindings": [
 		{
-			"before": ["leader", "w"],
-			"commands": ["workbench.action.files.save"]
+			"before": [
+				"leader",
+				"w"
+			],
+			"commands": [
+				"workbench.action.files.save"
+			]
 		}
 	],
 	"debug.terminal.clearBeforeReusing": true,
@@ -96,7 +112,9 @@
 		"editor.defaultFormatter": "foxundermoon.shell-format"
 	},
 	"shellformat.useEditorConfig": true,
-	"clangd.arguments": ["-header-insertion=never"],
+	"clangd.arguments": [
+		"-header-insertion=never"
+	],
 	"C_Cpp.intelliSenseEngine": "disabled",
 	"C_Cpp.enhancedColorization": "disabled",
 	"cmake.generator": "Ninja",
@@ -134,5 +152,81 @@
 	"findJump.positionAbsolute": false,
 	"findJump.dimWhenActive": true,
 	"findJump.excludeNextChars": 1,
-	"findJump.jumpChars": "123456789abcdefghijklmnopqrstuvwxyz"
+	"findJump.jumpChars": "123456789abcdefghijklmnopqrstuvwxyz",
+	"workbench.colorTheme": "Solarized Monochrome Dark",
+	"workbench.colorCustomizations": {
+		"[Solarized Monochrome Dark]": {
+			"editor.background": "#00212b",
+			"editorGutter.background": "#00212b",
+			"editorIndentGuide.background1": "#3d555c",
+			"editorIndentGuide.activeBackground1": "#3d555c",
+			"editorGroupHeader.tabsBackground": "#002b36",
+			"tab.inactiveBackground": "#002b36",
+			"tab.inactiveForeground": "#657b83",
+			"tab.activeBackground": "#003847",
+			"tab.activeForeground": "#93a1a1",
+			"tab.border": "#002b36",
+			"widget.border": "#51676d",
+			"errorForeground": "#c0602f",
+			"editorGroup.border": "#3d555c",
+			"diffEditor.insertedLineBackground": "#85990006",
+			"diffEditor.insertedTextBackground": "#85990010",
+			"diffEditor.removedLineBackground": "#21242c",
+			"diffEditor.removedTextBackground": "#42262c"
+		}
+	},
+	"editor.tokenColorCustomizations": {
+		"[Solarized Monochrome Dark]": {
+			"textMateRules": [
+				{
+					"scope": [
+						"keyword.control.directive",
+						"punctuation.definition.directive"
+					],
+					"settings": {
+						"foreground": "#859900",
+						"fontStyle": "bold"
+					}
+				},
+				{
+					"scope": [
+						"entity.name.type",
+						"storage.type.built-in",
+						"support.type.built-in"
+					],
+					"settings": {
+						"fontStyle": "italic"
+					}
+				}
+			]
+		}
+	},
+	"editor.semanticHighlighting.enabled": true,
+	"editor.semanticTokenColorCustomizations": {
+		"[Solarized Monochrome Dark]": {
+			"rules": {
+				"type": {
+					"italic": true
+				},
+				"class": {
+					"italic": true
+				},
+				"struct": {
+					"italic": true
+				},
+				"enum": {
+					"italic": true
+				},
+				"union": {
+					"italic": true
+				},
+				"typeParameter": {
+					"italic": true
+				},
+				"concept": {
+					"italic": true
+				}
+			}
+		}
+	}
 }
