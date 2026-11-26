@@ -15,8 +15,15 @@ static const char fshader_source[] = {
 	, '\0'
 };
 
+enum vertex_attribute
+{
+	vertex_attribute_position,
+	vertex_attribute_color,
+};
+
 static const char *attributes[] = {
-	[0] = "in_vertex_position",
+	[vertex_attribute_position] = "in_vertex_position",
+	[vertex_attribute_color] = "in_vertex_color",
 };
 
 #define version "#version 460 core"
@@ -58,6 +65,12 @@ static float vertices[] = {
 	 0.5f, -0.5f, 0.0f,
 	 0.0f,  0.5f, 0.0f,
 };
+
+static float colors[] = {
+   1.0f, 0.0f, 0.0f, 
+   0.0f, 1.0f, 0.0f,
+   0.0f, 0.0f, 1.0f 
+};
 /* clang-format on */
 
 int
@@ -69,13 +82,19 @@ main(int argc, char *argv[])
 	glGenVertexArrays(1, &varray);
 	glBindVertexArray(varray);
 
-	uint32_t vbuffer;
-	glGenBuffers(1, &vbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vbuffer);
+	uint32_t buffer_vertex;
+	glGenBuffers(1, &buffer_vertex);
+	glBindBuffer(GL_ARRAY_BUFFER, buffer_vertex);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glVertexAttribPointer(vertex_attribute_position, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
+	glEnableVertexAttribArray(vertex_attribute_position);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
-	glEnableVertexAttribArray(0);
+	uint32_t buffer_color;
+	glGenBuffers(1, &buffer_color);
+	glBindBuffer(GL_ARRAY_BUFFER, buffer_color);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
+	glVertexAttribPointer(vertex_attribute_color, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
+	glEnableVertexAttribArray(vertex_attribute_color);
 
 	uint32_t program = shader_program_create(vshader, countof(vshader), fshader, countof(fshader), attributes, countof(attributes));
 	glUseProgram(program);
