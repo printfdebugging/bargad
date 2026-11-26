@@ -1,3 +1,4 @@
+#include "engine/image.h"
 #include "engine/logger.h"
 #include "engine/macros.h"
 #include "engine/shader.h"
@@ -19,11 +20,13 @@ enum vertex_attribute
 {
 	vertex_attribute_position,
 	vertex_attribute_color,
+	vertex_attribute_uv,
 };
 
 static const char *attributes[] = {
 	[vertex_attribute_position] = "in_vertex_position",
 	[vertex_attribute_color] = "in_vertex_color",
+	[vertex_attribute_uv] = "in_vertex_uv",
 };
 
 #define version "#version 460 core"
@@ -71,6 +74,12 @@ static float colors[] = {
    0.0f, 1.0f, 0.0f,
    0.0f, 0.0f, 1.0f 
 };
+
+float uv[] = {
+	0.0f, 0.0f,
+	1.0f, 0.0f,
+	0.5f, 1.0f
+};
 /* clang-format on */
 
 int
@@ -96,10 +105,39 @@ main(int argc, char *argv[])
 	glVertexAttribPointer(vertex_attribute_color, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
 	glEnableVertexAttribArray(vertex_attribute_color);
 
+	uint32_t buffer_uv;
+	glGenBuffers(1, &buffer_uv);
+	glBindBuffer(GL_ARRAY_BUFFER, buffer_uv);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
+	glVertexAttribPointer(vertex_attribute_uv, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
+	glEnableVertexAttribArray(vertex_attribute_uv);
+
 	uint32_t program = shader_program_create(vshader, countof(vshader), fshader, countof(fshader), attributes, countof(attributes));
-	glUseProgram(program);
+
+	struct image image = { 0 };
+	image_init_from_file(&image, PROJECT_ASSETS "bargad.png");
+	uint64_t image_format = image_format_from_channels(image.channels);
+
+	uint32_t texture_unit = 0;
+	glActiveTexture(GL_TEXTURE0 + texture_unit);
+
+	uint32_t texture;
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glTexImage2D(GL_TEXTURE_2D, 0, (int)image_format, image.width, image.height, 0, (uint32_t)image_format, GL_UNSIGNED_BYTE, image.data);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	glTextureParameteri(texture, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+	glTextureParameteri(texture, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+
+	{
+		int location = glGetUniformLocation(program, "uniform_texture0");
+		if(location == -1)
+			LOG_FATAL("Invalid uniform location, got -1\n");
+		glProgramUniform1i(program, location, (int)texture_unit);
+	}
 
 	glClearColor(HexRGBA(0X00212bFF));
+	glUseProgram(program);
 
 	while(!glfwWindowShouldClose(window))
 	{
@@ -109,6 +147,7 @@ main(int argc, char *argv[])
 		window_swap_buffers(window);
 	}
 
+	image_deinit(&image);
 	window_destroy(window);
 	glfwTerminate();
 	return EXIT_SUCCESS;
