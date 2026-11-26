@@ -35,7 +35,9 @@ function(executable_target name)
 		set_target_properties(${name} PROPERTIES LINKER_LANGUAGE C)
 	endif()
 
-	target_compile_definitions(${name} PRIVATE ${ARG_DEFINES})
+	target_compile_definitions(${name} PRIVATE ${ARG_DEFINES}
+			PRIVATE_ASSETS="$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/assets/>$<INSTALL_INTERFACE:${CMAKE_INSTALL_DATADIR}/${CMAKE_PROJECT_NAME}/${name}/>"
+			PROJECT_ASSETS="$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/assets/>$<INSTALL_INTERFACE:${CMAKE_INSTALL_DATADIR}/${CMAKE_PROJECT_NAME}/>")
 	target_include_directories(${name} PRIVATE include)
 
 	if (APPLE AND "OBJC" IN_LIST ARG_LANGUAGES)
