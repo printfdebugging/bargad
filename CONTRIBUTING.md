@@ -1,3 +1,47 @@
+# Build Instructions
+
+## Environment Setup
+- Run [dependencies.sh](./tooling/dependencies.sh)
+- On Windows
+  - Installs MSYS2, Git, VSCode
+  - Installs the compilers and build tools under the `clang64/mingw-w64-clang-x86_64` MSYS2 toolchain
+  - Adds `C:\msys64\clang64\bin` to the path
+- On MacOS
+  - Installs Homebrew
+  - Installs the compilers and build tools with `brew`
+- On Linux, 
+  - Installs the packages
+
+> [!NOTE]
+> `dependencies.sh` only installs packages for Archlinux. If you use some
+> other distribution, feel free to find the equivalent package names and add
+> them to the script, thanks!
+
+## Build Steps
+```bash
+make init  # Git submodule fetch
+make       # Debug build with CMake
+code .     # Open in VSCode
+```
+
+## IDE Support
+### General
+- CMake generates a `compile_commands.json`, so any IDE/editor with clangd LSP should work.
+- The [.clang-format] and [.editorconfig] files standardize the formatting and indentation rules
+- `make reformat` reformats the source files in git, so that can be used from CLI to format the files.
+- Neovim & Emacs users can figure this out on their own :wink:
+- Qt Creator also works with CMake without much configuration, so that's something to look for if you don't want to use VSCode.
+
+[.clang-format]: ./.clang-format
+[.editorconfig]: ./.editorconfig
+
+### VSCode
+- [extensions.json] lists some extensions which are nice to have, for debugging, code navigation etc.
+- See [.vscode] for an example VSCode config.
+
+[extensions.json]: ./tooling/vscode/.vscode/extensions.json
+[.vscode]: ./tooling/vscode/.vscode
+
 # LLM Policy
 
 > [!NOTE]
