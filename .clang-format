@@ -81,9 +81,9 @@ SpaceBeforeParensOptions:
 # Sorting
 SortIncludes:
   Enabled: true
-  Natural: true
-  IgnoreExtension: true
-  FilesBeforeFolders: true
+  # Natural: true
+  # IgnoreExtension: true
+  # FilesBeforeFolders: true
 SortUsingDeclarations: true
 
 AttributeMacros:
