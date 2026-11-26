@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 4.0)
-project(farmhouse C)
+project(bargad C)
 
 set(VENDOR_PATH "${CMAKE_CURRENT_SOURCE_DIR}/vendor")
 set(SCRIPTS_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
