@@ -64,6 +64,6 @@ function(executable_target name)
 		install(TARGETS ${name})
 		install(
 			DIRECTORY assets/
-			DESTINATION ${CMAKE_INSTALL_DATADIR}/${name} OPTIONAL)
+			DESTINATION ${CMAKE_INSTALL_DATADIR}/${CMAKE_PROJECT_NAME}/${name} OPTIONAL)
 	endif()
 endfunction()

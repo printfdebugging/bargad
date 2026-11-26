@@ -16,6 +16,7 @@ include(testing)
 include(executable)
 include(library)
 include(vendor)
+include(assets)
 
 
 file(GLOB_RECURSE project_build_files
