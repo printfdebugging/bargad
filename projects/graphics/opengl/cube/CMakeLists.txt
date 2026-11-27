@@ -1,4 +1,4 @@
 get_filename_component(name "${CMAKE_CURRENT_LIST_DIR}" NAME)
-executable("${name}"
+executable("gl-${name}"
 	LANGUAGES C
 	LIBRARIES engine)
