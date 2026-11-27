@@ -7,12 +7,12 @@
 #include <stdlib.h>
 
 static const char vshader_source[] = {
-#embed VERTEX_SHADER
+#embed "shader.vert"
 	, '\0'
 };
 
 static const char fshader_source[] = {
-#embed FRAGMENT_SHADER
+#embed "shader.frag"
 	, '\0'
 };
 
