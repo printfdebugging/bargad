@@ -108,8 +108,8 @@ main(int argc, char *argv[])
 	uint32_t buffer_uv;
 	glGenBuffers(1, &buffer_uv);
 	glBindBuffer(GL_ARRAY_BUFFER, buffer_uv);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
-	glVertexAttribPointer(vertex_attribute_uv, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(uv), uv, GL_STATIC_DRAW);
+	glVertexAttribPointer(vertex_attribute_uv, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void *)0);
 	glEnableVertexAttribArray(vertex_attribute_uv);
 
 	uint32_t program = shader_program_create(vshader, countof(vshader), fshader, countof(fshader), attributes, countof(attributes));
@@ -128,6 +128,8 @@ main(int argc, char *argv[])
 	glGenerateMipmap(GL_TEXTURE_2D);
 	glTextureParameteri(texture, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
 	glTextureParameteri(texture, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+	glTextureParameteri(texture, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTextureParameteri(texture, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	{
 		int location = glGetUniformLocation(program, "uniform_texture0");
