@@ -64,21 +64,29 @@ static struct window_options window_options = {
 
 /* clang-format off */
 static float vertices[] = {
-	-0.5f, -0.5f, 0.0f,
-	 0.5f, -0.5f, 0.0f,
-	 0.0f,  0.5f, 0.0f,
+	-0.25f, -0.5f, 0.0f,
+	 0.25f, -0.5f, 0.0f,
+	 0.25f,  0.5f, 0.0f,
+	-0.25f,  0.5f, 0.0f,
 };
 
 static float colors[] = {
    1.0f, 0.0f, 0.0f, 
    0.0f, 1.0f, 0.0f,
-   0.0f, 0.0f, 1.0f 
+   0.0f, 0.0f, 1.0f,
+   1.0f, 1.0f, 0.0f,
 };
 
 float uv[] = {
 	0.0f, 0.0f,
 	1.0f, 0.0f,
-	0.5f, 1.0f
+	1.0f, 1.0f,
+	0.0f, 1.0f,
+};
+
+uint32_t indices[] = {
+	0, 1, 2,
+	0, 2, 3,
 };
 /* clang-format on */
 
@@ -111,6 +119,11 @@ main(int argc, char *argv[])
 	glBufferData(GL_ARRAY_BUFFER, sizeof(uv), uv, GL_STATIC_DRAW);
 	glVertexAttribPointer(vertex_attribute_uv, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void *)0);
 	glEnableVertexAttribArray(vertex_attribute_uv);
+
+	uint32_t buffer_indices;
+	glGenBuffers(1, &buffer_indices);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer_indices);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	uint32_t program = shader_program_create(vshader, countof(vshader), fshader, countof(fshader), attributes, countof(attributes));
 
@@ -145,7 +158,7 @@ main(int argc, char *argv[])
 	{
 		window_poll_events();
 		glClear(GL_COLOR_BUFFER_BIT);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		window_swap_buffers(window);
 	}
 
