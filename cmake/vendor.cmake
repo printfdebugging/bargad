@@ -1,8 +1,8 @@
-add_subdirectory(${CMAKE_SOURCE_DIR}/vendor/cglm)
-add_subdirectory(${CMAKE_SOURCE_DIR}/vendor/glfw)
-add_subdirectory(${CMAKE_SOURCE_DIR}/vendor/glad)
-add_subdirectory(${CMAKE_SOURCE_DIR}/vendor/harfbuzz)
-add_subdirectory(${CMAKE_SOURCE_DIR}/vendor/lua)
-add_subdirectory(${CMAKE_SOURCE_DIR}/vendor/cgltf)
-add_subdirectory(${CMAKE_SOURCE_DIR}/vendor/stb)
-add_subdirectory(${CMAKE_SOURCE_DIR}/vendor/libuv)
+file(GLOB vendor_build_files
+	CONFIGURE_DEPENDS
+	LIST_DIRECTORIES false "${VENDOR_PATH}/*/CMakeLists.txt")
+
+foreach(vendor_build_file ${vendor_build_files})
+	get_filename_component(vendor_directory "${vendor_build_file}" DIRECTORY)
+	add_subdirectory("${vendor_directory}")
+endforeach()
